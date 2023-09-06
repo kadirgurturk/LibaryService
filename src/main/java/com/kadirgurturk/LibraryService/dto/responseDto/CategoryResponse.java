@@ -14,7 +14,7 @@ public class CategoryResponse {
     @JsonProperty("books")
     private List<String> booknames;
 
-    public CategoryResponse categoryToResponseDto(Category entity){
+    public static CategoryResponse categoryToResponseDto(Category entity){
 
         CategoryResponse categoryResponse = new CategoryResponse();
 
@@ -27,7 +27,7 @@ public class CategoryResponse {
         return categoryResponse;
     }
 
-    public List<CategoryResponse> bookToResponseDto(List<Category> entities){
+    public static List<CategoryResponse> bookToResponseDto(List<Category> entities){
         List<CategoryResponse> categoryResponses = new ArrayList<>();
 
         for (var entity : entities){

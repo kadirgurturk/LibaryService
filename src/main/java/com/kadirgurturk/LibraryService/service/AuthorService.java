@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -69,6 +70,24 @@ public class AuthorService {
             Zipcode zipcode = zipcodeService.getZipcode(authorRequestDto.getZipcodeId());
             author.setZipcode(zipcode);
         }
+        return AuthorResponse.authorToAuthorResponse(author);
+    }
+
+    @Transactional
+    public AuthorResponse addZipcodeToAuthor(Long authorId, Long zipcodeId) {
+        Author author = getAuthor(authorId);
+        Zipcode zipcode = zipcodeService.getZipcode(zipcodeId);
+        if (Objects.nonNull(author.getZipcode())){
+            throw new RuntimeException("author already has a zipcode");
+        }
+        author.setZipcode(zipcode);
+        return AuthorResponse.authorToAuthorResponse(author);
+    }
+
+    @Transactional
+    public AuthorResponse deleteZipcodeFromAuthor(Long authorId) {
+        Author author = getAuthor(authorId);
+        author.setZipcode(null);
         return AuthorResponse.authorToAuthorResponse(author);
     }
 
