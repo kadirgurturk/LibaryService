@@ -21,7 +21,7 @@ public class BookResponse {
     private List<String> authorName;
     private String categoryName;
 
-    public BookResponse bookToResponseDto(Book entity){
+    public BookResponse bookToResponse(Book entity){
 
         BookResponse bookResponse = new BookResponse();
 
@@ -38,11 +38,11 @@ public class BookResponse {
         return bookResponse;
     }
 
-    public List<BookResponse> bookToResponseDto(List<Book> entities){
+    public List<BookResponse> bookToResponses(List<Book> entities){
        List<BookResponse> bookResponses = new ArrayList<>();
 
        for (var entity : entities){
-           bookResponses.add(bookToResponseDto(entity));
+           bookResponses.add(bookToResponse(entity));
        }
 
        return bookResponses;

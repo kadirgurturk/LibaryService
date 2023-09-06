@@ -22,7 +22,7 @@ public class AuthorResponse {
     private List<String> books;
     private String zipcode;
 
-    public AuthorResponse authorToAuthorResponse(Author entity){
+    public static AuthorResponse authorToAuthorResponse(Author entity){
 
         AuthorResponse authorResponse = new AuthorResponse();
 
@@ -38,7 +38,7 @@ public class AuthorResponse {
         return authorResponse;
 
     }
-    public List<AuthorResponse> bookToResponseDto(List<Author> entities){
+    public static List<AuthorResponse> authorResponses(List<Author> entities){
         List<AuthorResponse> authorResponses = new ArrayList<>();
 
         for (var entity : entities){
