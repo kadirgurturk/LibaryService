@@ -60,6 +60,12 @@ public class BookService {
         return book;
     }
 
+    public BookResponse getBookById(Long bookId) {
+        Book book = getBook(bookId);
+        return BookResponse.bookToResponse(book);
+    }
+
+
     public List<BookResponse> getBooks() {
         List<Book> books = StreamSupport
                 .stream(bookRepository.findAll().spliterator(), false)
@@ -148,5 +154,6 @@ public class BookService {
         category.removeBook(book);
         return BookResponse.bookToResponse(book);
     }
+
 
 }

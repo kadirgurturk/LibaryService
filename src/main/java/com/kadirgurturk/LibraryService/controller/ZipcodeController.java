@@ -1,7 +1,9 @@
 package com.kadirgurturk.LibraryService.controller;
 
+import com.kadirgurturk.LibraryService.data.entity.City;
 import com.kadirgurturk.LibraryService.data.entity.Zipcode;
 import com.kadirgurturk.LibraryService.dto.requestDto.ZipCodeRequest;
+import com.kadirgurturk.LibraryService.dto.responseDto.ApıResponse;
 import com.kadirgurturk.LibraryService.service.ZipcodeService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,46 +22,82 @@ public class ZipcodeController {
 
 
     @PostMapping()
-    public ResponseEntity<Zipcode> addZipcode(@RequestBody @Valid final ZipCodeRequest zipcodeRequestDto) {
+    public ResponseEntity<?> addZipcode(@RequestBody @Valid final ZipCodeRequest zipcodeRequestDto) {
         Zipcode zipcode = zipcodeService.addZipcode(zipcodeRequestDto);
-        return new ResponseEntity<>(zipcode, HttpStatus.OK);
+
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcode);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Zipcode> getZipcode(@PathVariable final Long id) {
+    public ResponseEntity<?> getZipcode(@PathVariable final Long id) {
         Zipcode zipcode = zipcodeService.getZipcode(id);
-        return new ResponseEntity<>(zipcode, HttpStatus.OK);
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcode);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
     @GetMapping()
-    public ResponseEntity<List<Zipcode>> getZipcodes() {
+    public ResponseEntity<?> getZipcodes() {
         List<Zipcode> zipcodes = zipcodeService.getZipcodes();
-        return new ResponseEntity<>(zipcodes, HttpStatus.OK);
+        ApıResponse< List<Zipcode>> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcodes);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Zipcode> deleteZipcode(@PathVariable final Long id) {
+    public ResponseEntity<?> deleteZipcode(@PathVariable final Long id) {
         Zipcode zipcode = zipcodeService.deleteZipcode(id);
-        return new ResponseEntity<>(zipcode, HttpStatus.OK);
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcode);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<Zipcode> editZipcode(@RequestBody @Valid final ZipCodeRequest zipcodeRequestDto,
+    public ResponseEntity<?> editZipcode(@RequestBody @Valid final ZipCodeRequest zipcodeRequestDto,
                                                @PathVariable final Long id) {
         Zipcode zipcode = zipcodeService.editZipcode(id, zipcodeRequestDto);
-        return new ResponseEntity<>(zipcode, HttpStatus.OK);
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcode);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping()
-    public ResponseEntity<Zipcode> addCity(@RequestParam("city") final Long cityId,
+    @PostMapping("/")
+    public ResponseEntity<?> addCity(@RequestParam("city") final Long cityId,
                                            @RequestParam("zipcode") final Long zipcodeId) {
         Zipcode zipcode = zipcodeService.addCityToZipcode(zipcodeId, cityId);
-        return new ResponseEntity<>(zipcode, HttpStatus.OK);
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcode);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/{zipcodeId}")
-    public ResponseEntity<Zipcode> deleteCity(@RequestParam("zipcode") final Long zipcode) {
+    @PostMapping("/")
+    public ResponseEntity<?> deleteCity(@RequestParam("zipcode") final Long zipcode) {
         Zipcode zipcodeNew = zipcodeService.removeCityFromZipcode(zipcode);
-        return new ResponseEntity<>(zipcodeNew, HttpStatus.OK);
+        ApıResponse<Zipcode> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(zipcodeNew);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 }

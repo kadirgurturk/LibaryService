@@ -1,7 +1,9 @@
 package com.kadirgurturk.LibraryService.controller;
 
 import com.kadirgurturk.LibraryService.dto.requestDto.AuthorRequest;
+import com.kadirgurturk.LibraryService.dto.responseDto.ApıResponse;
 import com.kadirgurturk.LibraryService.dto.responseDto.AuthorResponse;
+import com.kadirgurturk.LibraryService.dto.responseDto.CategoryResponse;
 import com.kadirgurturk.LibraryService.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -22,13 +24,23 @@ public class AuthorController {
     public ResponseEntity<?> addAuthor(@RequestBody @Valid final AuthorRequest authorRequest)
     {
         AuthorResponse authorResponse= authorService.addAuthor(authorRequest);
-        return new ResponseEntity<>(authorResponse, HttpStatus.OK);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @GetMapping()
-    public ResponseEntity<AuthorResponse> getAuthor(@PathVariable final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getAuthor(@PathVariable final Long id) {
         AuthorResponse authorResponse = authorService.getAuthorById(id);
-        return new ResponseEntity<>(authorResponse, HttpStatus.OK);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
     @GetMapping()
@@ -38,30 +50,50 @@ public class AuthorController {
         return new ResponseEntity<>(authorResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping()
-    public ResponseEntity<AuthorResponse> deleteAuthor(@PathVariable final Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAuthor(@PathVariable final Long id) {
         AuthorResponse authorResponse = authorService.deleteAuthor(id);
-        return new ResponseEntity<>(authorResponse, HttpStatus.OK);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping()
-    private ResponseEntity<AuthorResponse> editAuthor(@PathVariable final Long id,
+    @PostMapping("/{id}")
+    private ResponseEntity<?> editAuthor(@PathVariable final Long id,
                                                          @RequestBody @Valid final AuthorRequest authorRequest) {
         AuthorResponse authorResponse = authorService.editAuthor(id, authorRequest);
-        return new ResponseEntity<>(authorResponse, HttpStatus.OK);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping()
-    private ResponseEntity<AuthorResponse> addZipcode(@RequestParam("zipcode") final Long zipcodeId,
+    @PostMapping("/")
+    private ResponseEntity<?> addZipcode(@RequestParam("zipcode") final Long zipcodeId,
                                                       @RequestParam("author") final Long authorId) {
         AuthorResponse authorResponse = authorService.addZipcodeToAuthor(authorId, zipcodeId);
-        return new ResponseEntity<>(authorResponse, HttpStatus.OK);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping()
-    private ResponseEntity<AuthorResponse> removeZipcode(@RequestParam("zipcode") final Long id) {
-        AuthorResponse authorResponseDto = authorService.deleteZipcodeFromAuthor(id);
-        return new ResponseEntity<>(authorResponseDto, HttpStatus.OK);
+    @PostMapping("/")
+    private ResponseEntity<?> removeZipcode(@RequestParam("zipcode") final Long id) {
+        AuthorResponse authorResponse = authorService.deleteZipcodeFromAuthor(id);
+        ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
 }
