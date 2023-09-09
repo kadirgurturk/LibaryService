@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author,Long> {
@@ -19,5 +20,5 @@ public interface AuthorRepository extends JpaRepository<Author,Long> {
             "JOIN a.books b " +
             "JOIN a.zipcode z " +
             "WHERE a.id IN :authorId")
-    List<AuthorDetail> findAuthorDetailsWithBooksByAuthorId(@Param("authorIds") List<Long> authorId);
+    Optional<AuthorDetail> findAuthorDetailsWithBooksByAuthorId(@Param("authorId") Long authorId);
 }

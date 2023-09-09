@@ -3,6 +3,7 @@ package com.kadirgurturk.LibraryService.service;
 import com.kadirgurturk.LibraryService.data.entity.Author;
 import com.kadirgurturk.LibraryService.data.entity.Zipcode;
 import com.kadirgurturk.LibraryService.data.repository.AuthorRepository;
+import com.kadirgurturk.LibraryService.dto.modal.author.AuthorDetail;
 import com.kadirgurturk.LibraryService.dto.requestDto.AuthorRequest;
 import com.kadirgurturk.LibraryService.dto.responseDto.AuthorResponse;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -91,4 +93,14 @@ public class AuthorService {
         return AuthorResponse.authorToAuthorResponse(author);
     }
 
+    public AuthorDetail findAuthorDetail(Long authorId){
+
+        Optional<AuthorDetail> authorDetail = authorRepository.findAuthorDetailsWithBooksByAuthorId(authorId);
+
+       if(authorDetail.isPresent()){
+           return authorDetail.get();
+       }else{
+           throw new RuntimeException("This Id Author is not valid");
+       }
+    }
 }

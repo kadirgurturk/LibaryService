@@ -1,9 +1,9 @@
 package com.kadirgurturk.LibraryService.controller;
 
+import com.kadirgurturk.LibraryService.dto.modal.author.AuthorDetail;
 import com.kadirgurturk.LibraryService.dto.requestDto.AuthorRequest;
 import com.kadirgurturk.LibraryService.dto.responseDto.ApıResponse;
 import com.kadirgurturk.LibraryService.dto.responseDto.AuthorResponse;
-import com.kadirgurturk.LibraryService.dto.responseDto.CategoryResponse;
 import com.kadirgurturk.LibraryService.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -38,6 +38,17 @@ public class AuthorController {
         ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
 
         apıResponse.setResults(authorResponse);
+        apıResponse.setStatus("Success");
+
+        return new ResponseEntity<>(apıResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<?> findAuthorDetail(@PathVariable final Long id) {
+        AuthorDetail authorDetail = authorService.findAuthorDetail(id);
+        ApıResponse<AuthorDetail> apıResponse = new ApıResponse<>();
+
+        apıResponse.setResults(authorDetail);
         apıResponse.setStatus("Success");
 
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
