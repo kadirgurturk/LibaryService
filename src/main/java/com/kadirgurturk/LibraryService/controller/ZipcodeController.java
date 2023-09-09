@@ -90,7 +90,7 @@ public class ZipcodeController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/remove/")
     public ResponseEntity<?> deleteCity(@RequestParam("zipcode") final Long zipcode) {
         Zipcode zipcodeNew = zipcodeService.removeCityFromZipcode(zipcode);
         ApıResponse<Zipcode> apıResponse = new ApıResponse<>();

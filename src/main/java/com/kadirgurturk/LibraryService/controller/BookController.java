@@ -79,7 +79,7 @@ public class BookController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/category/")
     public ResponseEntity<?> addCategory(@RequestParam("category") final Long categoryId,
                                          @RequestParam("book") final Long bookId) {
         BookResponse bookResponse = bookService.addCategoryToBook(bookId, categoryId);
@@ -91,7 +91,7 @@ public class BookController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/category/remove/")
     public ResponseEntity<?> removeCategory(@RequestParam("category") final Long categoryId,
                                                           @RequestParam("book") final Long bookId) {
         BookResponse bookResponse = bookService.removeCategoryFromBook(bookId, categoryId);
@@ -103,7 +103,7 @@ public class BookController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/author/")
     public ResponseEntity<?> addAuthor(@RequestParam("author") final Long authorId,
                                                   @RequestParam("book") final Long bookId) {
         BookResponse bookResponse = bookService.addAuthorToBook(bookId, authorId);
@@ -115,7 +115,7 @@ public class BookController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/author/remove/")
     public ResponseEntity<?> removeAuthor(@RequestParam("author") final Long authorId,
                                                         @RequestParam("book") final Long bookId) {
         BookResponse bookResponse = bookService.removeAuthorFromBook(bookId, authorId);

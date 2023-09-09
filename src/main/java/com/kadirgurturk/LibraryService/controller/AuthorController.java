@@ -75,7 +75,7 @@ public class AuthorController {
 
     @PostMapping("/")
     private ResponseEntity<?> addZipcode(@RequestParam("zipcode") final Long zipcodeId,
-                                                      @RequestParam("author") final Long authorId) {
+                                         @RequestParam("author") final Long authorId) {
         AuthorResponse authorResponse = authorService.addZipcodeToAuthor(authorId, zipcodeId);
         ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();
 
@@ -85,7 +85,7 @@ public class AuthorController {
         return new ResponseEntity<>(apıResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/remove")
     private ResponseEntity<?> removeZipcode(@RequestParam("zipcode") final Long id) {
         AuthorResponse authorResponse = authorService.deleteZipcodeFromAuthor(id);
         ApıResponse<AuthorResponse> apıResponse = new ApıResponse<>();

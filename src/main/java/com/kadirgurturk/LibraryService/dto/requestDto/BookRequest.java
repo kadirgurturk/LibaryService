@@ -3,6 +3,7 @@ package com.kadirgurturk.LibraryService.dto.requestDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class BookRequest {
 
     @NotNull
-    @Min(value = 3)
+    @Size(min = 3)
     private String name;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -24,7 +25,7 @@ public class BookRequest {
     private Integer pageCount;
 
     @NotNull
-    @Min(value = 3)
+    @Size(min = 3)
     private String language;
 
 

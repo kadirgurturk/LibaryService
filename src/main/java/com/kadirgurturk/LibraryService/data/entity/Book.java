@@ -28,8 +28,8 @@ public class Book {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private List<Author> authors = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
